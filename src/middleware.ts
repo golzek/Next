@@ -1,5 +1,4 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server"
-import { setUserCountryHeader } from "./lib/userCountryHeader"
 import { NextResponse } from "next/server"
 
 const isPublicRoute = createRouteMatcher([
