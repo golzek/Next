@@ -1,19 +1,19 @@
-import { Button } from "@/components/ui/button"
-import { canAccessAdminPages } from "@/permissions/general"
-import { getCurrentUser } from "@/services/clerk"
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs"
-import Link from "next/link"
-import { ReactNode, Suspense } from "react"
+import { Button } from "@/components/ui/button";
+import { canAccessAdminPages } from "@/permissions/general";
+import { getCurrentUser } from "@/services/clerk";
+import { Show, SignInButton, UserButton } from "@clerk/nextjs";
+import Link from "next/link";
+import { ReactNode, Suspense } from "react";
 
 export default function ConsumerLayout({
-	children,
-}: Readonly<{ children: ReactNode }>) {
+										   children,
+									   }: Readonly<{ children: ReactNode }>) {
 	return (
 		<>
 			<Navbar />
 			{children}
 		</>
-	)
+	);
 }
 
 function Navbar() {
@@ -27,7 +27,7 @@ function Navbar() {
 					Course Platform
 				</Link>
 				<Suspense>
-					<SignedIn>
+					<Show when="signed-in">
 						<AdminLink />
 						<Link
 							className="hover:bg-accent/10 flex items-center px-2"
@@ -50,28 +50,28 @@ function Navbar() {
 								}}
 							/>
 						</div>
-					</SignedIn>
+					</Show>
 				</Suspense>
 				<Suspense>
-					<SignedOut>
+					<Show when="signed-out">
 						<Button
 							className="self-center"
 							asChild
 						>
 							<SignInButton>Sign In</SignInButton>
 						</Button>
-					</SignedOut>
+					</Show>
 				</Suspense>
 			</nav>
 		</header>
-	)
+	);
 }
 
 async function AdminLink() {
-	const user = await getCurrentUser()
+	const user = await getCurrentUser();
 
 	if (!canAccessAdminPages(user)) {
-		return null
+		return null;
 	}
 
 	return (
@@ -81,5 +81,5 @@ async function AdminLink() {
 		>
 			Admin
 		</Link>
-	)
+	);
 }
