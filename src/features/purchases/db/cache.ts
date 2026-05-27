@@ -1,5 +1,5 @@
 import { getGlobalTag, getIdTag, getUserTag } from "@/lib/dataCache"
-import { updateTag } from "next/cache"
+import { revalidateTag } from "next/cache"
 
 export function getPurchaseGlobalTag() {
 	return getGlobalTag("purchases")
@@ -20,7 +20,7 @@ export function revalidatePurchaseCache({
 	id: string
 	userId: string
 }) {
-	updateTag(getPurchaseGlobalTag(), "max")
-	updateTag(getPurchaseIdTag(id), "max")
-	updateTag(getPurchaseUserTag(userId), "max")
+	revalidateTag(getPurchaseGlobalTag(), "max")
+	revalidateTag(getPurchaseIdTag(id), "max")
+	revalidateTag(getPurchaseUserTag(userId), "max")
 }
