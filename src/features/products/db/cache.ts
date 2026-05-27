@@ -1,5 +1,5 @@
 import { getGlobalTag, getIdTag } from "@/lib/dataCache"
-import { revalidateTag } from "next/cache"
+import { updateTag } from "next/cache"
 
 export function getProductGlobalTag() {
 	return getGlobalTag("products")
@@ -10,6 +10,6 @@ export function getProductIdTag(id: string) {
 }
 
 export function revalidateProductCache(id: string) {
-	revalidateTag(getProductGlobalTag(), "everyone")
-	revalidateTag(getProductIdTag(id), "everyone")
+	updateTag(getProductGlobalTag(), )
+	updateTag(getProductIdTag(id), )
 }

@@ -1,5 +1,5 @@
 import { getGlobalTag, getIdTag, getUserTag } from "@/lib/dataCache"
-import { revalidateTag } from "next/cache"
+import { updateTag } from "next/cache"
 
 export function getUserCourseAccessGlobalTag() {
 	return getGlobalTag("userCourseAccess")
@@ -26,7 +26,7 @@ export function revalidateUserCourseAccessCache({
 	courseId: string
 	userId: string
 }) {
-	revalidateTag(getUserCourseAccessGlobalTag(), "max")
-	revalidateTag(getUserCourseAccessIdTag({ courseId, userId }), "max")
-	revalidateTag(getUserCourseAccessUserTag(userId), "max")
+	updateTag(getUserCourseAccessGlobalTag(), "max")
+	updateTag(getUserCourseAccessIdTag({ courseId, userId }), "max")
+	updateTag(getUserCourseAccessUserTag(userId), "max")
 }
